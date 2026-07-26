@@ -5,7 +5,7 @@ A full‑stack MERN (MongoDB, Express, React, Node.js) application for booking a
 ---
 
 ## 📂 Project Root
-
+```
 local-services-booking-platform/
 │
 ├── client/                # React frontend
@@ -14,7 +14,7 @@ local-services-booking-platform/
 ├── package.json           # Root dependencies (optional, or separate client/server)
 ├── README.md              # Documentation
 └── .gitignore             # Ignore node_modules, .env, build files
-
+```
 Code
 
 ---
