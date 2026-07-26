@@ -1,0 +1,14 @@
+// server/src/middleware/roleMiddleware.js
+
+/**
+ * Middleware to authorize specific roles
+ * @param {...string} roles - Allowed roles (e.g., "customer", "provider", "admin")
+ */
+export const authorizeRoles = (...roles) => {
+  return (req, res, next) => {
+    if (!req.user || !roles.includes(req.user.role)) {
+      return res.status(403).json({ message: "Access denied: insufficient role" });
+    }
+    next();
+  };
+};

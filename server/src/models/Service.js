@@ -1,0 +1,44 @@
+// server/src/models/Service.js
+import mongoose from "mongoose";
+
+const serviceSchema = new mongoose.Schema(
+  {
+    providerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    title: {
+      type: String,
+      required: [true, "Service title is required"],
+      trim: true,
+    },
+    description: {
+      type: String,
+      required: [true, "Service description is required"],
+    },
+    category: {
+      type: String,
+      required: [true, "Service category is required"],
+    },
+    durationMinutes: {
+      type: Number,
+      required: [true, "Service duration is required"],
+      min: [15, "Duration must be at least 15 minutes"],
+    },
+    price: {
+      type: Number,
+      required: [true, "Service price is required"],
+      min: [0, "Price must be a positive number"],
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  { timestamps: true }
+);
+
+const Service = mongoose.model("Service", serviceSchema);
+
+export default Service;

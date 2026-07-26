@@ -1,0 +1,51 @@
+// server/src/models/User.js
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Name is required"],
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: [true, "Email is required"],
+      unique: true,
+      lowercase: true,
+      match: [/^\S+@\S+\.\S+$/, "Please enter a valid email"],
+    },
+    passwordHash: {
+      type: String,
+      required: [true, "Password is required"],
+    },
+    profilePicUrl: {
+      type: String,
+      default: "",
+    },
+    role: {
+      type: String,
+      enum: ["provider", "customer"],
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+// 🔒 Password hashing before save
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("passwordHash")) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.passwordHash = await bcrypt.hash(this.passwordHash, salt);
+  next();
+});
+
+// 🔑 Method to compare passwords during login
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.passwordHash);
+};
+
+const User = mongoose.model("User", userSchema);
+
+export default User;

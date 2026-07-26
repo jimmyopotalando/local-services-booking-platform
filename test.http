@@ -1,0 +1,9 @@
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Jimmy Test",
+  "email": "jimmytest@gmail.com",
+  "password": "StrongPass123",
+  "role": "customer"
+}
