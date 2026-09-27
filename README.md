@@ -3,7 +3,7 @@
 A full‑stack MERN (MongoDB, Express, React, Node.js) application for booking and managing local services.
 
 ---
-
+```
 ## 📂 Project Root
 local-services-booking-platform/
 │
@@ -15,7 +15,7 @@ local-services-booking-platform/
 └── .gitignore             # Ignore node_modules, .env, build files
 
 Code
-
+```
 ---
 
 ## 🚀 Features
